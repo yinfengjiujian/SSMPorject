@@ -1,27 +1,20 @@
 package com.itzixi.web.shiro;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.itzixi.pojo.ActiveUser;
+import com.itzixi.pojo.SysPermission;
+import com.itzixi.pojo.SysUser;
+import com.itzixi.service.UserService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.itzixi.pojo.ActiveUser;
-import com.itzixi.pojo.SysPermission;
-import com.itzixi.pojo.SysUser;
-import com.itzixi.service.UserService;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -39,12 +32,12 @@ import com.itzixi.service.UserService;
 public class ShiroDBRealm extends AuthorizingRealm {
 	
 	@Autowired
-	private UserService userService; 
-	
-	public ShiroDBRealm(CacheManager cacheManager) {
-        super(cacheManager);
-    }
-	
+	private UserService userService;
+
+	public ShiroDBRealm(ShiroSpringCacheManager cacheManager) {
+		super(cacheManager);
+	}
+
 	/**
 	 * 用于登录认证
 	 */

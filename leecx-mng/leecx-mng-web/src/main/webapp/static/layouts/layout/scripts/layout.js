@@ -616,7 +616,7 @@ var Layout = function () {
                 dataType: "html",
                 success: function (res) {
                     App.stopPageLoading();
-                                    
+
                     for (var i = 0; i < ajaxContentSuccessCallbacks.length; i++) {
                         ajaxContentSuccessCallbacks[i].call(res);
                     }

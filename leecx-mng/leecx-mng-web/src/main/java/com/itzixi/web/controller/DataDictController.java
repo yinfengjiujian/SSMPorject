@@ -57,7 +57,6 @@ public class DataDictController extends BaseController {
 	/**
 	 * 
 	 * @Description: 创建数据字典 或者 更新数据字典
-	 * @param user
 	 * @return
 	 * 
 	 * @author leechenxiang
@@ -96,7 +95,6 @@ public class DataDictController extends BaseController {
 	/**
 	 * 
 	 * @Description: 条件查询数据字典列表
-	 * @param user
 	 * @param page
 	 * @return
 	 * 
@@ -119,7 +117,6 @@ public class DataDictController extends BaseController {
 	/**
 	 * 
 	 * @Description: 跳转到修改数据字典页面
-	 * @param userId
 	 * @param request
 	 * @return
 	 * 
@@ -141,7 +138,6 @@ public class DataDictController extends BaseController {
 	/**
 	 * 
 	 * @Description: 删除数据字典
-	 * @param userId
 	 * @return
 	 * 
 	 * @author leechenxiang

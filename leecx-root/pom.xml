@@ -9,7 +9,7 @@
 	<!-- 集中定义依赖版本号 -->
 	<properties>
 		<junit.version>4.12</junit.version>
-		<spring.version>4.3.8.RELEASE</spring.version>
+		<spring.version>4.3.16.RELEASE</spring.version>
 		<spring-data-redis.version>1.8.7.RELEASE</spring-data-redis.version>
 		<apache-commons-pool2>2.4.2</apache-commons-pool2>
 		<mybatis.version>3.2.8</mybatis.version>
@@ -68,12 +68,6 @@
 	<!-- 只定义依赖的版本，不会实际依赖 -->
 	<dependencyManagement>
 		<dependencies>
-
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-jms</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
 
 			<!-- 时间操作组件 -->
 			<dependency>
@@ -308,26 +302,26 @@
 			</dependency>
 
 			<!-- log4j2 begin -->
-			<!-- <dependency> -->
-			<!-- <groupId>org.apache.logging.log4j</groupId> -->
-			<!-- <artifactId>log4j-api</artifactId> -->
-			<!-- <version>${log4j2.version}</version> -->
-			<!-- </dependency> -->
-			<!-- <dependency> -->
-			<!-- <groupId>org.apache.logging.log4j</groupId> -->
-			<!-- <artifactId>log4j-core</artifactId> -->
-			<!-- <version>${log4j2.version}</version> -->
-			<!-- </dependency> -->
-			<!-- <dependency> -->
-			<!-- <groupId>org.apache.logging.log4j</groupId> -->
-			<!-- <artifactId>log4j-jcl</artifactId> -->
-			<!-- <version>${log4j2.version}</version> -->
-			<!-- </dependency> -->
-			<!-- <dependency> -->
-			<!-- <groupId>org.apache.logging.log4j</groupId> -->
-			<!-- <artifactId>log4j-slf4j-impl</artifactId> -->
-			<!-- <version>${log4j2.version}</version> -->
-			<!-- </dependency> -->
+			 <!--<dependency>-->
+			 <!--<groupId>org.apache.logging.log4j</groupId>-->
+			 <!--<artifactId>log4j-api</artifactId>-->
+			 <!--<version>${log4j2.version}</version>-->
+			 <!--</dependency>-->
+			 <!--<dependency>-->
+			 <!--<groupId>org.apache.logging.log4j</groupId>-->
+			 <!--<artifactId>log4j-core</artifactId>-->
+			 <!--<version>${log4j2.version}</version>-->
+			 <!--</dependency>-->
+			 <!--<dependency>-->
+			 <!--<groupId>org.apache.logging.log4j</groupId>-->
+			 <!--<artifactId>log4j-jcl</artifactId>-->
+			 <!--<version>${log4j2.version}</version>-->
+			 <!--</dependency>-->
+			 <!--<dependency>-->
+			 <!--<groupId>org.apache.logging.log4j</groupId>-->
+			 <!--<artifactId>log4j-slf4j-impl</artifactId>-->
+			 <!--<version>${log4j2.version}</version>-->
+			 <!--</dependency>-->
 			<!-- log4j2 end -->
 
 			<!-- 日志处理 -->
@@ -452,21 +446,21 @@
 			</dependency>
 			
 			<!-- 引入dubbo -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>dubbo</artifactId>
-				<version>${dubbo.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.zookeeper</groupId>
-				<artifactId>zookeeper</artifactId>
-				<version>${zookeeper.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.github.sgroschupf</groupId>
-				<artifactId>zkclient</artifactId>
-				<version>${zkclient.version}</version>
-			</dependency>
+			<!--<dependency>-->
+				<!--<groupId>com.alibaba</groupId>-->
+				<!--<artifactId>dubbo</artifactId>-->
+				<!--<version>${dubbo.version}</version>-->
+			<!--</dependency>-->
+			<!--<dependency>-->
+				<!--<groupId>org.apache.zookeeper</groupId>-->
+				<!--<artifactId>zookeeper</artifactId>-->
+				<!--<version>${zookeeper.version}</version>-->
+			<!--</dependency>-->
+			<!--<dependency>-->
+				<!--<groupId>com.github.sgroschupf</groupId>-->
+				<!--<artifactId>zkclient</artifactId>-->
+				<!--<version>${zkclient.version}</version>-->
+			<!--</dependency>-->
 		</dependencies>
 
 	</dependencyManagement>

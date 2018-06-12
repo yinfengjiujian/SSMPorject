@@ -7,11 +7,10 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import com.itzixi.web.utils.SpringContextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.itzixi.service.DataDictService;
-import com.itzixi.web.utils.SpringContextUtil;
-import com.itzixi.web.utils.SpringUtils;
 
 /**
  * 
@@ -36,7 +35,7 @@ public class DataDictValueTag extends SimpleTagSupport {
 	public void doTag() throws JspException, IOException {
 		if (StringUtils.isNotEmpty(typeCode) && StringUtils.isNotEmpty(ddKey)) {
 			
-			DataDictService ddService = (DataDictService)SpringContextUtil.getBean(DataDictService.class);
+			DataDictService ddService = (DataDictService) SpringContextUtil.getBean(DataDictService.class);
 			String ddValue = ddService.queryDataDictValueByCodeKey(typeCode, ddKey);
 			
 			JspWriter out = getJspContext().getOut();

@@ -1,7 +1,5 @@
 package com.itzixi.web.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.itzixi.common.pojo.JqGridResult;
 import com.itzixi.common.utils.LeeJSONResult;
 import com.itzixi.pojo.DemoItem;
-import com.itzixi.pojo.SysUser;
 import com.itzixi.service.DemoItemService;
 
 /**
@@ -61,7 +58,6 @@ public class DemoItemController extends BaseController {
 	/**
 	 * 
 	 * @Description: 创建一个商品或者修改他
-	 * @param user
 	 * @return
 	 * 
 	 * @author leechenxiang
