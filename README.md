@@ -14,10 +14,10 @@ LeeCX 开源后台管理系统，前端基于bootstrap+jquery，扁平化风格�
 test/test<br />
 
 ### 开发环境：<br />
-sts-eclipse, jdk8, tomcat7或8<br />
+Intellij IDEA , jdk8, tomcat7或8<br />
 
 ### 技术选型：<br />
-1、核心框架：Spring Framework 4.3.3.RELEASE<br />
+1、核心框架：Spring Framework 4.3.16.RELEASE<br />
 2、权限框架：Apache Shiro 1.3.2<br />
 3、持久层框架：MyBatis 3.2.8 + pagehelper 4.1.3<br />
 4、数据库连接池：阿里巴巴 Druid 1.1.0<br />
