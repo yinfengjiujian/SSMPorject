@@ -7,12 +7,7 @@
 	<display-name>LeeCX</display-name>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
 	<!-- 加载log4j -->
@@ -109,10 +104,6 @@
 		    <param-name>loginPassword</param-name>  
 		    <param-value>Chackylee_0106</param-value>  
 	    </init-param> 
-		<init-param>
-	        <param-name>resetEnable</param-name>
-	        <param-value>false</param-value>
-	    </init-param>
 	</servlet>
 	
 	<!-- 会拦截所有请求包括静态资源。需要在springmvc.xml中添加静态资源的映射 -->
