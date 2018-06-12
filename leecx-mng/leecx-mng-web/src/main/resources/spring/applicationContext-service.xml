@@ -9,7 +9,7 @@
 
     <!-- 扫描包加载Service实现类 -->
     <context:component-scan
-            base-package="com.itzixi.service,com.itzixi.web.utils,com.itzixi.components.utils"></context:component-scan>
+            base-package="com.neusoft.service,com.neusoft.web.utils,com.neusoft.components.utils"></context:component-scan>
 
     <!-- 自动创建代理 对@AspectJ注解的支持 -->
     <!-- 通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Service -->
@@ -22,8 +22,8 @@
     <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
         <property name="patterns">
             <list>
-                <value>com.itzixi.service.*</value>
-                <value>com.itzixi.mapper.*</value>
+                <value>com.neusoft.service.*</value>
+                <value>com.neusoft.mapper.*</value>
             </list>
         </property>
     </bean>
@@ -62,6 +62,6 @@
             </set>
         </constructor-arg>
     </bean>
-    <bean id="jedisClientCluster" class="com.itzixi.rest.component.impl.JedisClientCluster"/> -->
+    <bean id="jedisClientCluster" class="com.neusoft.rest.component.impl.JedisClientCluster"/> -->
 
 </beans>

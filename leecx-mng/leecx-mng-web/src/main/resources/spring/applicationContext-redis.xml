@@ -72,7 +72,7 @@
                 <entry key="halfHour" value="1800"/>
                 <entry key="hour" value="3600"/>
                 <entry key="oneDay" value="86400"/>
-                <entry key="itzixiCaptcha" value="500"/>
+                <entry key="neusoftCaptcha" value="500"/>
                 <!--                 shiro cache keys -->
                 <entry key="authenticationCache" value="1800"/><!-- 用户每次操作后会要等缓存过期后会重新再取 -->
                 <entry key="authorizationCache" value="1800"/><!-- 用户每次操作后会要等缓存过期后会重新再取 -->

@@ -10,7 +10,7 @@
 
 	<tag>
 		<name>dataDictValue</name>
-		<tag-class>com.itzixi.web.tag.DataDictValueTag</tag-class>
+		<tag-class>com.neusoft.web.tag.DataDictValueTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>typeCode</name>
