@@ -28,8 +28,12 @@
         <!--
         var setting = {
             data: {
+                //是否为简单数据格式 enable---true 为简单数据格式，否则false,树的数据格式必须为标准形式
                 simpleData: {
-                    enable: true
+                    enable: true,
+                    idkey: "id",
+                    pIdKey: "pId",
+                    rootPId: null
                 }
             }
         };
@@ -50,6 +54,7 @@
         ];
 
         $(document).ready(function(){
+
             $.fn.zTree.init($("#treeDemo"), setting, zNodes);
         });
         //-->

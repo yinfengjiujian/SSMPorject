@@ -27,7 +27,7 @@
     <!--<mvc:resources mapping="/errors/**" location="/errors/" cache-period="31556926"/>-->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/center/"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 

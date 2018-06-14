@@ -31,6 +31,7 @@
                 key: {
                     title:"t"
                 },
+                //是否为简单数据格式 enable---true 为简单数据格式，否则false,树的数据格式必须为标准形式
                 simpleData: {
                     enable: true
                 }
