@@ -32,6 +32,14 @@ var ztreeAsync = {
                     rootPId: 0
                 }
             },
+
+            /**
+             * selectedMulti
+             * true / false 分别表示 支持 / 不支持 同时选中多个节点
+             * 设置为 true时，按下 Ctrl 或 Cmd 键可以选中多个节点
+             * 设置为 true / false 都不影响按下 Ctrl 或 Cmd 键可以让已选中的节点取消选中状态
+             * （ 取消选中状态可以参考 setting.view.autoCancelSelected ）
+             */
             view: {
                 selectedMulti: false
             },
@@ -45,6 +53,10 @@ var ztreeAsync = {
                 autoParam: ["id", "pId", "name"],
                 dataFilter: ztreeAsync.dataFiter
             },
+            //设置树形所有监听事件配置,具体事件请查看API
+            callback: {
+                onClick:ztreeAsync.treeNodeClick    //节点点击事件
+            }
         };
 
         //页面进入初始化加载树
@@ -62,6 +74,16 @@ var ztreeAsync = {
                 alert("初始化加载树形，发生错误！");
             }
         });
+    },
+
+    /**
+     * 树形节点Node被点击时触发的事件
+     * @param event
+     * @param treeId
+     * @param treeNode
+     */
+    treeNodeClick:function (event, treeId, treeNode) {
+        alert(treeNode.name);
     },
 
     /**
@@ -103,7 +125,7 @@ var ztreeAsync = {
             ztreeAsync.handleTree();
         }
     }
-}
+};
 
 //页面加载完后执行
 jQuery(document).ready(function () {
