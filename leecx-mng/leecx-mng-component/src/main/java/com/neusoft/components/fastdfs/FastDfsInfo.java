@@ -2,7 +2,6 @@ package com.neusoft.components.fastdfs;
 
 public class FastDfsInfo  implements java.io.Serializable{
 
-    // serialVersionUID : TODO
     private static final long serialVersionUID = 4858945733404165431L;
     private String group;
     private String path;
