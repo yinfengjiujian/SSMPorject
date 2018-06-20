@@ -33,7 +33,7 @@ public interface UserService {
 	/**
 	 * 
 	 * @Description: 查询用户列表
-	 * @param username
+	 * @param user
 	 * @return
 	 * 
 	 * @author leechenxiang

@@ -2,10 +2,12 @@ package com.neusoft.components.fastdfs;
 
 import com.neusoft.components.fastdfs.exception.FastDFSException;
 import com.neusoft.components.fastdfs.pool.ConnectionPoolFactory;
+import com.neusoft.pojo.Fastdfsfile;
 import org.csource.common.MyException;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.ProtoCommon;
 import org.csource.fastdfs.StorageClient;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+@Component
 public class FastDFSTemplate {
     private ConnectionPoolFactory connPoolFactory;
     private FastDFSTemplateFactory factory;
@@ -22,33 +25,33 @@ public class FastDFSTemplate {
         this.factory = factory;
     }
 
+
     /**
-     *
-     * @Description: 上传文件
      * @param data
-     * @param ext 后缀，如：jpg、bmp（注意不带.）
+     * @param ext      后缀，如：jpg、bmp（注意不带.）
+     * @param fileName 文件名
      * @return
      * @throws FastDFSException
-     * @author: Aaron
+     * @Description: 上传文件
      * @date: 2017年7月12日 下午7:01:32
      */
-    public FastDfsInfo upload(byte[] data, String ext) throws FastDFSException {
-        return this.upload(data, ext, null);
+    public Fastdfsfile upload(byte[] data, String ext, String fileName) throws FastDFSException {
+        return this.upload(data, ext, null, fileName);
     }
 
 
     /**
-     *
-     * @Description: 上传文件
      * @param data
-     * @param ext 后缀，如：jpg、bmp（注意不带.）
+     * @param ext      后缀，如：jpg、bmp（注意不带.）
      * @param values
+     * @param fileName 文件名
      * @return
      * @throws FastDFSException
+     * @Description: 上传文件
      * @author: Aaron
      * @date: 2017年7月12日 下午7:01:55
      */
-    public FastDfsInfo upload(byte[] data, String ext, Map<String, String> values) throws FastDFSException {
+    public Fastdfsfile upload(byte[] data, String ext, Map<String, String> values, String fileName) throws FastDFSException {
         NameValuePair[] valuePairs = null;
         if (values != null && !values.isEmpty()) {
             valuePairs = new NameValuePair[values.size()];
@@ -64,7 +67,7 @@ public class FastDFSTemplate {
             String[] uploadResults = client.upload_file(data, ext, valuePairs);
             String groupName = uploadResults[0];
             String remoteFileName = uploadResults[1];
-            FastDfsInfo fastDfsInfo = new FastDfsInfo(groupName, remoteFileName);
+            Fastdfsfile fastDfsInfo = new Fastdfsfile(groupName, remoteFileName, fileName);
             if (factory != null) {
                 this.setFileAbsolutePath(fastDfsInfo);
             }
@@ -78,26 +81,24 @@ public class FastDFSTemplate {
 
 
     /**
-     *
-     * @Description: 下载文件
      * @param dfs
      * @return
      * @throws FastDFSException
+     * @Description: 下载文件
      * @author: Aaron
      * @date: 2017年7月12日 下午7:02:27
      */
-    public byte[] loadFile(FastDfsInfo dfs) throws FastDFSException {
-        return this.loadFile(dfs.getGroup(), dfs.getPath());
+    public byte[] loadFile(Fastdfsfile dfs) throws FastDFSException {
+        return this.loadFile(dfs.getGroupName(), dfs.getFilePath());
     }
 
 
     /**
-     *
-     * @Description: 下载文件
      * @param groupName
      * @param remoteFileName
      * @return
      * @throws FastDFSException
+     * @Description: 下载文件
      * @author: Aaron
      * @date: 2017年7月12日 下午7:02:46
      */
@@ -114,23 +115,21 @@ public class FastDFSTemplate {
 
 
     /**
-     *
-     * @Description: 删除文件
      * @param dfs
      * @throws FastDFSException
+     * @Description: 删除文件
      * @author: Aaron
      * @date: 2017年7月12日 下午7:02:59
      */
-    public void deleteFile(FastDfsInfo dfs) throws FastDFSException {
-        this.deleteFile(dfs.getGroup(), dfs.getPath());
+    public void deleteFile(Fastdfsfile dfs) throws FastDFSException {
+        this.deleteFile(dfs.getGroupName(), dfs.getFilePath());
     }
 
     /**
-     *
-     * @Description: 删除文件
      * @param groupName
      * @param remoteFileName
      * @throws FastDFSException
+     * @Description: 删除文件
      * @author: Aaron
      * @date: 2017年7月12日 下午7:03:13
      */
@@ -151,18 +150,17 @@ public class FastDFSTemplate {
 
 
     /**
-     *
-     * @Description: 设置远程可访问路径
      * @param group
      * @param path
      * @return
      * @throws IOException
      * @throws NoSuchAlgorithmException
      * @throws MyException
+     * @Description: 设置远程可访问路径
      * @author: Aaron
      * @date: 2017年7月12日 下午7:03:34
      */
-    public String setFileAbsolutePath(String group, String path)
+    public String setFileAbsolutePath(String group, String path, String fileName)
             throws IOException, NoSuchAlgorithmException, MyException {
         int ts = (int) (System.currentTimeMillis() / 1000), port;
         String token = "";
@@ -187,18 +185,31 @@ public class FastDFSTemplate {
             port = factory.getG_tracker_http_port();
         }
         String address = split[0].trim();
+
+        /**
+         * 下载恢复原文件名称的写法 在地址后面追加参数  &attname=XX.doc
+         * 此写法，必须配合nginx一起使用，在ngnix.conf添加如下配置
+         *
+
+            location ~/group([0-9])/M00 {
+                if ($arg_attname ~* \.(doc|docx|txt|pdf|zip|rar|txt)$) {
+                    add_header Content-Disposition "attachment;filename=$arg_attname";
+                }
+                ngx_fastdfs_module;
+            }
+         *
+         */
         return factory.getProtocol() +
                 address + ":" +
                 port +
                 factory.getSepapator() +
                 group +
                 factory.getSepapator() +
-                path + token;
-
+                path  + token + "&attname=" + fileName;
     }
 
-    public void setFileAbsolutePath(FastDfsInfo fastDfsInfo) throws IOException, NoSuchAlgorithmException, MyException {
-        fastDfsInfo.setFileAbsolutePath(this.setFileAbsolutePath(fastDfsInfo.getGroup(), fastDfsInfo.getPath()));
+    public void setFileAbsolutePath(Fastdfsfile fastDfsInfo) throws IOException, NoSuchAlgorithmException, MyException {
+        fastDfsInfo.setCallPath(this.setFileAbsolutePath(fastDfsInfo.getGroupName(), fastDfsInfo.getFilePath(), fastDfsInfo.getFileName()));
     }
 
     protected StorageClient getClient() {

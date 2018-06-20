@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.mapper.FastdfsfileMapper" >
+  <resultMap id="BaseResultMap" type="com.neusoft.pojo.Fastdfsfile" >
+    <id column="file_id" property="fileId" jdbcType="VARCHAR" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="call_path" property="callPath" jdbcType="VARCHAR" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="is_activate" property="isActivate" jdbcType="INTEGER" />
+    <result column="file_date" property="fileDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    file_id, group_name, file_path, call_path, file_name, is_activate, file_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neusoft.pojo.FastdfsfileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from FastDFSFile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from FastDFSFile
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from FastDFSFile
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neusoft.pojo.FastdfsfileExample" >
+    delete from FastDFSFile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neusoft.pojo.Fastdfsfile" >
+    insert into FastDFSFile (file_id, group_name, file_path, 
+      call_path, file_name, is_activate, 
+      file_date)
+    values (#{fileId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, 
+      #{callPath,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{isActivate,jdbcType=INTEGER}, 
+      #{fileDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neusoft.pojo.Fastdfsfile" >
+    insert into FastDFSFile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="callPath != null" >
+        call_path,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="isActivate != null" >
+        is_activate,
+      </if>
+      <if test="fileDate != null" >
+        file_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="callPath != null" >
+        #{callPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="isActivate != null" >
+        #{isActivate,jdbcType=INTEGER},
+      </if>
+      <if test="fileDate != null" >
+        #{fileDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neusoft.pojo.FastdfsfileExample" resultType="java.lang.Integer" >
+    select count(*) from FastDFSFile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update FastDFSFile
+    <set >
+      <if test="record.fileId != null" >
+        file_id = #{record.fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupName != null" >
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filePath != null" >
+        file_path = #{record.filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.callPath != null" >
+        call_path = #{record.callPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileName != null" >
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isActivate != null" >
+        is_activate = #{record.isActivate,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileDate != null" >
+        file_date = #{record.fileDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update FastDFSFile
+    set file_id = #{record.fileId,jdbcType=VARCHAR},
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      file_path = #{record.filePath,jdbcType=VARCHAR},
+      call_path = #{record.callPath,jdbcType=VARCHAR},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      is_activate = #{record.isActivate,jdbcType=INTEGER},
+      file_date = #{record.fileDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.pojo.Fastdfsfile" >
+    update FastDFSFile
+    <set >
+      <if test="groupName != null" >
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="callPath != null" >
+        call_path = #{callPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="isActivate != null" >
+        is_activate = #{isActivate,jdbcType=INTEGER},
+      </if>
+      <if test="fileDate != null" >
+        file_date = #{fileDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neusoft.pojo.Fastdfsfile" >
+    update FastDFSFile
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      call_path = #{callPath,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      is_activate = #{isActivate,jdbcType=INTEGER},
+      file_date = #{fileDate,jdbcType=TIMESTAMP}
+    where file_id = #{fileId,jdbcType=VARCHAR}
+  </update>
+</mapper>

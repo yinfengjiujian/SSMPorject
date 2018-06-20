@@ -86,8 +86,13 @@
 			<artifactId>amqp-client</artifactId>
 			<version>5.2.0</version>
 		</dependency>
-			
-<!-- 		<dependency> -->
+        <dependency>
+            <groupId>com.neusoft</groupId>
+            <artifactId>leecx-mng-pojo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- 		<dependency> -->
 <!-- 			<groupId>org.hibernate</groupId> -->
 <!-- 			<artifactId>hibernate-validator</artifactId> -->
 <!-- 		</dependency> -->

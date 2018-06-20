@@ -1,10 +1,14 @@
 package com.neusoft.web.controller.BasePackage;
 
+import com.neusoft.common.utils.FileUtil;
 import com.neusoft.common.utils.LeeJSONResult;
 import com.neusoft.components.fastdfs.FastDFSTemplate;
-import com.neusoft.components.fastdfs.FastDfsInfo;
 import com.neusoft.components.fastdfs.exception.FastDFSException;
+import com.neusoft.pojo.Fastdfsfile;
+import com.neusoft.service.FastDFSService;
 import com.neusoft.web.controller.BaseController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +25,17 @@ import java.util.Map;
 @RequestMapping("/fastdfs")
 public class fastdfsController extends BaseController {
 
+    private static final Logger logger = LoggerFactory.getLogger(fastdfsController.class);
+
     @Autowired
     private FastDFSTemplate fastDFSTemplate;
 
+    @Autowired
+    private FastDFSService fastDFSService;
+
     @RequestMapping(value = "/UploadAdnDel", method = RequestMethod.GET)
     public void testUploadAndDel() throws FastDFSException {
-        FastDfsInfo fastDfsInfo = fastDFSTemplate.upload("".getBytes(), "txt");
+        Fastdfsfile fastDfsInfo = fastDFSTemplate.upload("".getBytes(), "txt","");
         System.out.println(fastDfsInfo);
         fastDFSTemplate.deleteFile(fastDfsInfo);
     }
@@ -40,8 +49,8 @@ public class fastdfsController extends BaseController {
                 byte[] b = new byte[fis.available()];
                 fis.read(b);
                 Map<String, String> map = new HashMap<>();
-                FastDfsInfo fastDfsInfo = fastDFSTemplate.upload(b, "jpg", map);
-                System.out.println(fastDfsInfo.getFileAbsolutePath());
+                Fastdfsfile fastDfsInfo = fastDFSTemplate.upload(b, "jpg", map,file.getName());
+                System.out.println(fastDfsInfo.getCallPath());
 //                fastDFSTemplate.deleteFile(fastDfsInfo);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -57,21 +66,26 @@ public class fastdfsController extends BaseController {
     @RequestMapping(value = "/testUpload", method = RequestMethod.GET)
     @ResponseBody
     public LeeJSONResult testUpload() {
-
-        FastDfsInfo fastDfsInfo = null;
+        Fastdfsfile fastDfsInfo = null;
         try {
-            File file = new File("C:\\336d6baa85.jpg");
+            File file = new File("C:\\4416000014_河源市人力资源和社会保障局_20180520_27804.doc");
             FileInputStream fis = new FileInputStream(file);
             byte[] b = new byte[fis.available()];
             fis.read(b);
             Map<String, String> map = new HashMap<>();
-            fastDfsInfo = fastDFSTemplate.upload(b, "jpg", map);
-            System.out.println(fastDfsInfo.getFileAbsolutePath());
+            fastDfsInfo = fastDFSTemplate.upload(b, FileUtil.getFileSuffix(file), map,file.getName());
+            if (fastDfsInfo == null) {
+                logger.error("上传文件失败，请确认！");
+            }
+            boolean result = fastDFSService.saveFastDFSFile(fastDfsInfo);
+            if (result) {
+                System.out.println(fastDfsInfo.getCallPath());
+            }
 //            fastDFSTemplate.deleteFile(fastDfsInfo);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         } catch (FastDFSException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
         return LeeJSONResult.ok(fastDfsInfo);
     }
