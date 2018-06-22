@@ -79,7 +79,7 @@ public class fastdfsController extends BaseController {
             }
             boolean result = fastDFSService.saveFastDFSFile(fastDfsInfo);
             if (result) {
-                System.out.println(fastDfsInfo.getCallPath());
+                logger.info(fastDfsInfo.getCallPath());
             }
 //            fastDFSTemplate.deleteFile(fastDfsInfo);
         } catch (IOException e) {

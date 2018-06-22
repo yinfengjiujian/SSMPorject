@@ -1,9 +1,6 @@
 package com.neusoft.service;
 
-import com.neusoft.common.utils.LeeJSONResult;
 import com.neusoft.pojo.Fastdfsfile;
-
-import java.io.File;
 
 /**
  * <p>Title: com.neusoft.service</p>

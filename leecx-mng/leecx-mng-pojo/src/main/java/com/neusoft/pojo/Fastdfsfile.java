@@ -1,5 +1,7 @@
 package com.neusoft.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Fastdfsfile {
@@ -15,6 +17,7 @@ public class Fastdfsfile {
 
     private Integer isActivate;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",locale="zh",timezone="GMT+8")
     private Date fileDate;
 
     public Fastdfsfile(){

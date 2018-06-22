@@ -1,6 +1,5 @@
 package com.neusoft.service.impl;
 
-import com.neusoft.common.utils.LeeJSONResult;
 import com.neusoft.mapper.FastdfsfileMapper;
 import com.neusoft.pojo.Fastdfsfile;
 import com.neusoft.service.FastDFSService;
@@ -9,7 +8,6 @@ import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.Date;
 
 /**
